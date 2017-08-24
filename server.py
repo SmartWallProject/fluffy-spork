@@ -32,7 +32,7 @@ def requires_auth(f):
     def decorated(*args, **kwargs):
         user = User()
         if not user.logged_in():
-            return redirect(url_for("login"))
+            return redirect(url_for("/"))
 
         return f(*args, **kwargs)
 
@@ -44,7 +44,7 @@ def index():
     return open("public/main.html").read()
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['GET', 'POST'])
 @jsonf
 def login():
     session['username'] = "plesh"
@@ -68,7 +68,7 @@ def dashboard():
     template.generate("dashboard", {"user": user})
 
 
-@app.route("/user/info")
+@app.route("/api/user/info")
 @requires_auth
 @jsonf
 def user_info():
@@ -76,8 +76,8 @@ def user_info():
     return user.serialize()
 
 
-@app.route("/jobs/", defaults={"job_id": ""})
-@app.route("/jobs/<job_id>")
+@app.route("/api/jobs/", defaults={"job_id": ""})
+@app.route("/api/jobs/<job_id>")
 @jsonf
 def get_jobs(job_id):
     if job_id is "":
@@ -90,13 +90,13 @@ def get_jobs(job_id):
         return Job.get_by_id(job_id).serialize()
 
 
-@app.route("/jobs/<job_id>/tasks")
+@app.route("/api/jobs/<job_id>/tasks")
 @jsonf
 def get_tasks_by_job_id(job_id):
     return [task.serialize() for task in Task.get_by_job_id(job_id)]
 
 
-@app.route("/tasks/<task_id>/status")
+@app.route("/api/tasks/<task_id>/status")
 @requires_auth
 @jsonf
 def get_task_status_for_user(task_id):

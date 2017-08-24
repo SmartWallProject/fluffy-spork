@@ -59,7 +59,6 @@ class Status:
         self.last_code_entered = props['last_code_entered']
         self.last_result_message_shown = props['last_result_message_shown']
 
-
     def serialize(self):
         return {"status": self.status, "last_code_entered" : self.last_code_entered, "last_result_message_shown": self.last_result_message_shown}
 
