@@ -4,6 +4,10 @@
     height: 100%;
 }
 
+.body{
+    background: #18bc9c;
+}
+
 .no-padding-left {
     padding-left: 0 !important;
 }
