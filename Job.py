@@ -1,4 +1,5 @@
 from Database import query
+from user import User
 
 
 class Job:
@@ -32,6 +33,7 @@ class Job:
 
 class Task:
     def __init__(self, props):
+        self.task_id = props['task_id']
         self.name = props['task_name']
         self.description = props['description']
         self.default_code = props['default_code']
@@ -39,7 +41,7 @@ class Task:
         self.after_complete = props['after_complete']
 
     def serialize(self):
-        return {"name": self.name, "description": self.description, "default_code": self.default_code,
+        return {"task_id": self.task_id, "name": self.name, "description": self.description, "default_code": self.default_code,
                 "hints": self.hints}
 
     def run(self, code):
@@ -50,3 +52,22 @@ class Task:
         props = query("SELECT * FROM tasks WHERE job_id = ?", [job_id])
         return map(Task, props)
 
+
+class Status:
+    def __init__(self, props):
+        self.status = props['status']
+        self.last_code_entered = props['last_code_entered']
+        self.last_result_message_shown = props['last_result_message_shown']
+
+
+    def serialize(self):
+        return {"status": self.status, "last_code_entered" : self.last_code_entered, "last_result_message_shown": self.last_result_message_shown}
+
+    def run(self, code):
+        pass
+
+    @staticmethod
+    def get_user_status_by_task_id(task_id):
+        user = User()
+        props = query("SELECT * FROM user_status WHERE task_id = ? AND user_id = ?", [task_id, user.user_id])
+        return map(Status, props)

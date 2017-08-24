@@ -2,7 +2,7 @@ from enum import Enum
 from flask import Flask, session, redirect, url_for, request, send_from_directory
 import json
 
-from Job import Job, Task
+from Job import Job, Task, Status
 from user import User
 from Pages import Pages
 from functools import wraps
@@ -61,7 +61,6 @@ def login():
             return {"status": "success"}
 
 
-
 @app.route('/dashboard')
 @requires_auth
 def dashboard():
@@ -90,15 +89,19 @@ def get_jobs(job_id):
     else:
         return Job.get_by_id(job_id).serialize()
 
+
 @app.route("/jobs/<job_id>/tasks")
 @jsonf
 def get_tasks_by_job_id(job_id):
     return [task.serialize() for task in Task.get_by_job_id(job_id)]
 
-@app.route("/getAllJobTasks/<job_id>")
+
+@app.route("/tasks/<task_id>/status")
 @requires_auth
-def get_all_job_tasks():
-    pass
+@jsonf
+def get_task_status_for_user(task_id):
+    return [status.serialize() for status in Status.get_user_status_by_task_id(task_id)]
+
 
 @app.route('/logout')
 def logout():
