@@ -32,7 +32,7 @@ def requires_auth(f):
     def decorated(*args, **kwargs):
         user = User()
         if not user.logged_in():
-            return redirect(url_for("/"))
+            return redirect("/")
 
         return f(*args, **kwargs)
 
@@ -44,11 +44,10 @@ def index():
     return open("public/main.html").read()
 
 
-@app.route('/api/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['POST', "GET"])
 @jsonf
 def login():
     session['username'] = "plesh"
-    return "faked login as plesh"
 
     if request.method == 'POST' and "username" in request.form and "password" in request.form:
         username = request.form['username']
@@ -112,4 +111,4 @@ def get_code_result(task_id):
 @app.route('/logout')
 def logout():
     User.log_out()
-    return redirect(url_for('/'))
+    return redirect("/")
