@@ -3,28 +3,28 @@
             <title>FluffySpork</title>
             
             <!--Lib Scripts - maintain order of imports-->
-            <script src="./js/lib/angular/angular.js"> </script>
-            <script src="./js/lib/angular/angular-route.js"> </script>
-            <script src="./js/lib/angular/angular-resource.js"> </script>
+            <script src="public/js/lib/angular/angular.js"> </script>
+            <script src="public/js/lib/angular/angular-route.js"> </script>
+            <script src="public/js/lib/angular/angular-resource.js"> </script>
             
-            <script src="./js/lib/jquery-3.2.1.js"></script>
+            <script src="public/js/lib/jquery-3.2.1.js"></script>
             <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-            <script src="./js/lib/bootstrap4/js/bootstrap.js"></script>
+            <script src="public/js/lib/bootstrap4/js/bootstrap.js"></script>
 
         
             <!-- App script -->
-            <script src="./js/app/app.js"></script>
-            <script src="./js/app/controllers/mainController.js"> </script>
-            <script src="./js/app/controllers/jobsController.js"> </script>
-            <script src="./js/app/services/jobService.js"> </script>
-            <script src="./js/app/controllers/mainController.js"> </script>
+            <script src="public/js/app/app.js"></script>
+            <script src="public/js/app/controllers/mainController.js"> </script>
+            <script src="public/js/app/controllers/jobsController.js"> </script>
+            <script src="public/js/app/services/jobService.js"> </script>
+            <script src="public/js/app/controllers/mainController.js"> </script>
             
             <!-- CSS -->
-            <link rel="stylesheet" type="text/css" href="../js/lib/bootstrap4/css/bootstrap.css">
+            <link rel="stylesheet" type="text/css" href="public/js/lib/bootstrap4/css/bootstrap.css">
             
         </head>
         
-        <body ng-controller="mainController">
+        <body ng-controller="mainController as mainController">
             <!-- navbar -->
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">

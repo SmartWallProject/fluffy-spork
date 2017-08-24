@@ -9,11 +9,11 @@ app.config(function($routeProvider) {
     })
     .when('/myJobs', {
         templateUrl : 'html/userJobs.html',
-        controller : 'userJobsController'
+        controller : 'userJobsController as controller'
     })
     .when('/jobs', {
         templateUrl : 'html/jobs.html',
-        controller : 'jobsController'
+        controller : 'jobsController as controller'
 
     })
     .otherwise({    
