@@ -3,6 +3,7 @@
 angular.module('mainApp')
 .service('jobService', ['$resource', function($resource) {
     let Job = $resource('/api/job/:jobId', {jobId:'@id'});
+    let JobTasks = $resource('/api/job/:jobId/tasks', {jobId:'@id'})
 
     //let UserJob = $resource('/user/jobs/:userJobId', {userJobid : '@id'});
     
@@ -12,6 +13,9 @@ angular.module('mainApp')
         },
         getJobById : function(jobId) {
           return Job.get({jobId : jobId}).$promise;
+        },
+        getTasksForJobId : function(jobId) {
+            return JobTasks.query({jobId:jobId}).$promise;
         }
     }
 }])
