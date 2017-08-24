@@ -3,6 +3,7 @@ import os
 
 from flask import session
 from Progress import Progress
+from Database import query
 
 
 class User:
@@ -11,8 +12,10 @@ class User:
         self.tasks_progress = None
         self.data = None
         if self.username is not None:
-            self.data = json.load(os.path.join("user_data", self.username, "data.json"))
-            self.tasks_progress = [Progress(task_progress) for task_progress in self.data['progress']]
+            print (self.username)
+            self.data = query("SELECT * FROM users WHERE username = ?", [self.username], one=True)
+            self.user_id = self.data['user_id']
+            # self.tasks_progress = [Progress(task_progress) for task_progress in self.data['progress']]
 
     def logged_in(self):
         return self.username is not None
