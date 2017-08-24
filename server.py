@@ -98,10 +98,18 @@ def get_jobs(job_id):
         return Job.get_by_id(job_id).serialize()
 
 
-@app.route("/api/job/<job_id>/tasks")
+@app.route("/api/job/<job_id>/<action>")
+@requires_auth
 @jsonf
-def get_tasks_by_job_id(job_id):
-    return [task.serialize() for task in Task.get_by_job_id(job_id)]
+def handle_jobs(job_id, action):
+    if action == "tasks":
+        return [task.serialize() for task in Task.get_by_job_id(job_id)]
+    elif action == "take":
+        user = User()
+        user.take_job(job_id)
+    elif action == "drop":
+        user = User()
+        user.take_job(job_id)
 
 
 @app.route("/api/tasks/<task_id>/<action>")
@@ -120,7 +128,6 @@ def task_handler(task_id, action):
 @jsonf
 def store_list():
     return [item.serialize() for item in Store.get_all_store_items()]
-
 
 
 @app.route('/logout')

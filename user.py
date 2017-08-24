@@ -1,10 +1,7 @@
-import json
-import os
-
 from flask import session
-from Progress import Progress
 from Database import query
 
+from Items import *
 
 class User:
     def __init__(self):
@@ -37,3 +34,17 @@ class User:
 
     def serialize(self):
         return {"username": self.username}
+
+    def take_job(self, job_id):
+        user_jobs = Job.get_by_user_id(self.user_id)
+        if any([job_id == job.job_id for job in user_jobs]):
+            return False
+        job = Job.get_by_id(job_id)
+
+        if job is None:
+            return False
+
+        query("INSERT INTO user_jobs (user_id, job_id) VALUES (?, ?)", [self.user_id, job_id])
+
+    def drop_job(self, job_id):
+        query("DELETE FROM user_jobs WHERE user_id = ? AND job_id = ?", [self.user_id, job_id])
