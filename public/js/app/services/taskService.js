@@ -2,7 +2,7 @@
 
 angular.module('mainApp')
     .service('taskService', ['$resource', function ($resource) {
-        let Task = $resource('/task/:taskId', {taskId:'@id'});
+        let Task = $resource('/api/task/:taskId', {taskId:'@id'});
 
         return {
 
