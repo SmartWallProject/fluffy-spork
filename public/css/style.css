@@ -53,3 +53,9 @@ body{
     margin-right: 3px;
     color: #282828;
 }
+
+.store-image-tag {
+    width:90px;
+    height:90px;
+
+}

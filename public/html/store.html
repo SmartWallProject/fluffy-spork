@@ -1,6 +1,10 @@
 <div ng-hide='controller.itemList.length==0'>
         <div class="row job-menu">
-            <div ng-repeat="item in controller.itemList" class="col-md-3 job-box alert alert-secondary">
+            <div ng-repeat="item in controller.itemList" class="col-md-3 job-box alert alert-secondary" style="max-height:250px;">
+
+                <div class="store-image">
+                    <img style='float:left;' class="store-image-tag" src="{{item.image_path}}">
+                </div>
                 <div class = "row"> 
                     <div class="col-md-8 no-padding-left"> <h5 class="job-title">{{item.item_name}}</h5> </div>
                     <div class="col-md-4"> <span class = "badge badge-primary job-points"> {{item.points_cost}} Points</span>
@@ -8,7 +12,9 @@
                 <div class="job-desc">
                     {{item.item_description}}
                 </div>
+
             </div>
+                <br style="clear:both;">
         </div>
 
 </div>
