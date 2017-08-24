@@ -1,5 +1,5 @@
 from enum import Enum
-from flask import Flask, session, redirect, url_for, request
+from flask import Flask, session, redirect, url_for, request, send_from_directory
 import json
 
 from Job import Job
@@ -7,7 +7,7 @@ from user import User
 from Pages import Pages
 from functools import wraps
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/public')
 app.secret_key = 'A0Zz91j/3yX l~Xbq!jmN]LWX/,?RT'
 template = Pages()
 
@@ -29,9 +29,9 @@ def requires_auth(f):
 
 
 @app.route('/')
-@requires_auth
+# @requires_auth
 def index():
-    return "Index"
+    return open("public/main.html").read()
 
 
 @app.route('/login', methods=['GET', 'POST'])
