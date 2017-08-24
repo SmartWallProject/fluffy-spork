@@ -29,7 +29,6 @@ def requires_auth(f):
 
 
 @app.route('/')
-# @requires_auth
 def index():
     return open("public/main.html").read()
 
@@ -64,15 +63,13 @@ def user_info():
     return json.dumps(user.serialize())
 
 
-@app.route("/jobs/")
-def get_jobs():
-    return json.dumps([job.serialize() for job in Job.get_all_jobs()])
-
-
+@app.route("/jobs/", defaults={"job_id": ""})
 @app.route("/jobs/<job_id>")
 def get_jobs(job_id):
-    return json.dumps(Job.get_by_id(job_id).serialize())
+    if job_id is "":
+        return json.dumps([job.serialize() for job in Job.get_all_jobs()])
 
+    return json.dumps(Job.get_by_id(job_id).serialize())
 
 @app.route("/getAllJobTasks/<job_id>")
 @requires_auth
