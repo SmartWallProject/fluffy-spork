@@ -2,7 +2,7 @@ from enum import Enum
 from flask import Flask, session, redirect, url_for, request, send_from_directory
 import json
 
-from Job import Job
+from Job import Job, Task
 from user import User
 from Pages import Pages
 from functools import wraps
@@ -19,6 +19,13 @@ class Errors(Enum):
 @app.route('/public/<path:path>')
 def send_js(path):
     return send_from_directory('public', path)
+
+def jsonf(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        return json.dumps(f(*args, **kwargs), indent=4)
+
+    return decorated
 
 def requires_auth(f):
     @wraps(f)
@@ -38,19 +45,21 @@ def index():
 
 
 @app.route('/login', methods=['GET', 'POST'])
+@jsonf
 def login():
-    error = None
+    session['username'] = "plesh"
+    return "faked login as plesh"
+
     if request.method == 'POST' and "username" in request.form and "password" in request.form:
         username = request.form['username']
         password = request.form['password']
 
         if not User.verify_login(username, password):
-            error = Errors.WRONG_USERNAME_PASSWORD
+            return {"status": "error", "reason": "wrong_username_password"}
         else:
             session['username'] = username
-            return redirect("/")
+            return {"status": "success"}
 
-    return template.generate("login_page", {"error": error})
 
 
 @app.route('/dashboard')
@@ -62,18 +71,29 @@ def dashboard():
 
 @app.route("/user/info")
 @requires_auth
+@jsonf
 def user_info():
     user = User()
-    return json.dumps(user.serialize())
+    return user.serialize()
 
 
 @app.route("/jobs/", defaults={"job_id": ""})
 @app.route("/jobs/<job_id>")
+@jsonf
 def get_jobs(job_id):
     if job_id is "":
-        return json.dumps([job.serialize() for job in Job.get_all_jobs()])
+        # all jobs
+        return [job.serialize() for job in Job.get_all_jobs()]
+    elif job_id == "self":
+        user = User()
+        return [job.serialize() for job in Job.get_by_user_id(user.user_id)]
+    else:
+        return Job.get_by_id(job_id).serialize()
 
-    return json.dumps(Job.get_by_id(job_id).serialize())
+@app.route("/jobs/<job_id>/tasks")
+@jsonf
+def get_tasks_by_job_id(job_id):
+    return [task.serialize() for task in Task.get_by_job_id(job_id)]
 
 @app.route("/getAllJobTasks/<job_id>")
 @requires_auth
