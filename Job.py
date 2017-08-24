@@ -3,6 +3,7 @@ from Database import query
 
 class Job:
     def __init__(self, props):
+        self.job_id = props['job_id']
         self.name = props['job_name']
         self.points = props['job_points']
         self.tags = list(filter(lambda f: f != "", (map(str.strip, props['tags'].split(",")))))
@@ -10,7 +11,7 @@ class Job:
         self.text_before_tasks = props['text_before_tasks']
 
     def serialize(self):
-        return {"name": self.name, "points": self.points, "tags": self.tags, "description": self.description,
+        return {"job_id": self.job_id, "name": self.name, "points": self.points, "tags": self.tags, "description": self.description,
                 "text_before_tasks": self.text_before_tasks}
 
     @staticmethod
