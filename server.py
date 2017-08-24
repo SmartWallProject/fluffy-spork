@@ -60,6 +60,21 @@ def login():
             return {"status": "success"}
 
 
+@app.route('/api/register', methods=['POST'])
+@jsonf
+def register():
+    if request.method == 'POST' and "username" in request.form and "password" in request.form:
+        username = request.form['username']
+        password = request.form['password']
+
+        if not User.username_exists(username):
+            return {"status": "error", "reason": "Username already exists"}
+        else:
+            User.add_user(username, password)
+            session['username'] = username
+            return {"status": "success"}
+
+
 @app.route('/dashboard')
 @requires_auth
 def dashboard():

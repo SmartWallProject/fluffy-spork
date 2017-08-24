@@ -1,23 +1,28 @@
 .job-field {
-    font-size: 0.75em;
+    font-size: 0.55em;
 }
+
+
 
 .job-box {
     background: #DDDDDD;
-    margin: 5px;
+    margin-left: 20px;
 }
 
 .job-tags ul {
     list-style-type: none;
     margin: 0;
-    padding: 0;
-    line-height: 110%;
+    position: relative;
 }
 
 .job-tag {
     display: inline;
-    font-size: 0.5em;
+    font-size: 0.5em !important;
     padding: 5px;
     margin-right: 3px;
     color: #282828;
+}
+
+body {
+    padding-top:150px;
 }

@@ -25,8 +25,15 @@ class User:
 
     @staticmethod
     def verify_login(username, password):
-        return os.path.exists(os.path.join("user_data", username, "password.txt")) and open(
-            os.path.join("user_data", username, "password.txt")).read() == password
+        return len(query("SELECT * FROM users WHERE username= ? AND password= ?", [username, password])) == 1
+
+    @staticmethod
+    def username_exists(username):
+        return len(query("SELECT * FROM users WHERE username= ?", [username])) > 0
+
+    @staticmethod
+    def add_user(username, password):
+        query("INSERT INTO users (username, password) VALUES (?, ?)", [username, password])
 
     def serialize(self):
         return {"username": self.username}
