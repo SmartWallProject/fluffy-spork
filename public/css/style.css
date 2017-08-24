@@ -14,7 +14,9 @@
     top: 0;
     right: 0;
 }
-
+.pad-box {
+         padding-top:150px;
+}
 .job-field {
     font-size: 0.55em;
 }

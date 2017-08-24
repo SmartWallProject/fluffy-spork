@@ -10,14 +10,14 @@ TASKS (catalog): task_id, name, description, default_code, hints
 TASK STATUS (per user): status (in_progress / completed), last_code_ente red, last_result_message_shown
 </div>-->
 
-<div class="container">
+<div class="container pad-box">
     <div class="row">
         <div class="jumbotron">
             <h1 class="display-3">{{controller.job.name}} <span class="badge badge-primary">{{controller.job.points}}</span></h1>
             <p class="lead">{{controller.job.description}}</p>
             <div class="row">
                 <div ng-repeat="tag in controller.job.tags" class="col">
-                        <div class=""><span class="badge badge-success">{{tag}}</span></div>
+                        <ul><span class="badge badge-success">{{tag}}</span></ul>
                 </div>
             </div>
         </div>
