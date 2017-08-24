@@ -86,8 +86,11 @@ class Status:
     @staticmethod
     def get_user_status_by_task_id(task_id):
         user = User()
-        props = query("SELECT * FROM user_status WHERE task_id = ? AND user_id = ?", [task_id, user.user_id])
-        return map(Status, props)
+        props = query("SELECT * FROM user_status WHERE task_id = ? AND user_id = ?", [task_id, user.user_id], one=True)
+        if props is None:
+            return False
+
+        return Status(props)
 
 
 class Example:
