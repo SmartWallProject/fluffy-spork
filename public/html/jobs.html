@@ -1,11 +1,19 @@
 <div ng-hide='controller.jobList.length==0'>
-    <ul>
-    <li ng-repeat="job in controller.jobList">
-        <div>
-            {{job.name}}
-            {{job.description}}
-            {{job.tags}}
+    <h2>
+        <div class="row">
+            <div ng-repeat="job in controller.jobList" class="col-md-3 job-box alert alert-secondary">
+                <h5 class="job-title">{{job.name}}</h5>
+                <div class="job-field">
+                    {{job.description}}
+                </div>
+                <div class="job-tags">
+                    <ul>
+                        <li ng-repeat="tag in job.tags" class="job-tag alert alert-info">
+                            {{tag}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </li>
-    </ul>
+
 </div>
