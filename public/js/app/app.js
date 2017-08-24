@@ -20,7 +20,7 @@ app.config(function($routeProvider) {
         controller : 'jobController as controller'
     })
     .when('/store', {
-        templateUrl : 'html/store.html',
+        templateUrl : 'public/html/store.html',
         controller : 'storeController as controller'
     })
     .otherwise({    
