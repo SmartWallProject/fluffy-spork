@@ -1,0 +1,14 @@
+<div ng-hide='controller.itemList.length==0'>
+        <div class="row job-menu">
+            <div ng-repeat="item in controller.itemList" class="col-md-3 job-box alert alert-secondary">
+                <div class = "row"> 
+                    <div class="col-md-8 no-padding-left"> <h5 class="job-title">{{item.item_name}}</h5> </div>
+                    <div class="col-md-4"> <span class = "badge badge-primary job-points"> {{item.points_cost}} Points</span>
+                </div>
+                <div class="job-desc">
+                    {{item.item_description}}
+                </div>
+            </div>
+        </div>
+
+</div>
