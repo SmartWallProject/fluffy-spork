@@ -2,12 +2,11 @@
     padding-top:150px;
     background: #18bc9c;
     height: 100%;
-    padding-left: 30vh;
     
 }
 
 body{
-    background: #18bc9c;
+    background: #18bc9c !important;
 }
 
 .no-padding-left {
@@ -33,7 +32,7 @@ body{
 
 .job-box {
     background: #DDDDDD;
-    margin-left: 20px;
+    margin-left: 4em;
     max-height: 150px;
     min-height: 150px;
     padding: 10px;
