@@ -13,7 +13,6 @@
     position: absolute;
     top: 0;
     right: 0;
-
 }
 
 .job-field {
@@ -23,8 +22,6 @@
 .job-desc {
     font-size: 0.4em;
 }
-
-
 
 .job-box {
     background: #DDDDDD;
