@@ -25,3 +25,6 @@ class User:
     def verify_login(username, password):
         return os.path.exists(os.path.join("user_data", username, "password.txt")) and open(
             os.path.join("user_data", username, "password.txt")).read() == password
+
+    def serialize(self):
+        return {"username": self.username}

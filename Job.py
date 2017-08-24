@@ -1,46 +1,42 @@
-import json
-import os
+from Database import query
 
 
 class Job:
-    def __init__(self, job_name):
-        pass
+    def __init__(self, props):
+        self.name = props['job_name']
+        self.points = props['job_points']
+        self.tags = list(filter(lambda f: f != "", (map(str.strip, props['tags'].split(",")))))
+        self.description = props['description']
+        self.text_before_tasks = props['text_before_tasks']
 
-    def get_name(self):
-        pass
+    def serialize(self):
+        return {"name": self.name, "points": self.points, "tags": self.tags, "description": self.description,
+                "text_before_tasks": self.text_before_tasks}
 
-    def get_summary(self):
-        pass
+    @staticmethod
+    def get_by_id(job_id):
+        props = query("SELECT * FROM jobs WHERE job_id = ?", [job_id], one=True)
+        return props
 
-    def get_tasks(self):
-        pass
+    @staticmethod
+    def get_all_jobs():
+        all_props = query("SELECT * FROM jobs")
+        return [Job(prop) for prop in all_props]
+
 
 
 class Task:
-    def __init__(self, job, folder_name):
-        self.job = job
-        self.folder_name = folder_name
-        props = json.load(os.path.join("jobs", job.get_folder_name(), folder_name, "props.json"))
-        self.name = props.get("name", "No Name")
-        self.before_code = props.get("before_code", "No Before Code")
-        self.default_code = props.get("default_code", "No Default Code")
-        self.after_code = props.get("after_code", "No After Code")
-        self.after_complete = props.get("after_complete", "No After Complete")
+    def __init__(self, task_id):
+        props = query("SELECT * FROM tasks WHERE task_id = ?", [task_id], one=True)
+        self.name = props['name']
+        self.description = props['description']
+        self.default_code = props['default_code']
+        self.hints = props['hints']
+        self.after_complete = props['after_complete']
 
-    def get_name(self):
-        return self.name
-
-    def get_before_code(self):
-        return self.before_code
-
-    def get_default_code(self):
-        return self.default_code
+    def serialize(self):
+        return {"name": self.name, "description": self.description, "default_code": self.default_code,
+                "hints": self.hints}
 
     def run(self, code):
         pass
-
-    def get_after_code(self):
-        return self.after_code
-
-    def after_complete(self):
-        return self.after_complete

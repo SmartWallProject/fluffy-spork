@@ -1,5 +1,8 @@
 from enum import Enum
 from flask import Flask, session, redirect, url_for, request
+import json
+
+from Job import Job
 from user import User
 from Pages import Pages
 from functools import wraps
@@ -53,6 +56,28 @@ def dashboard():
     user = User()
     template.generate("dashboard", {"user": user})
 
+
+@app.route("/user/info")
+@requires_auth
+def user_info():
+    user = User()
+    return json.dumps(user.serialize())
+
+
+@app.route("/jobs/")
+def get_jobs():
+    return json.dumps([job.serialize() for job in Job.get_all_jobs()])
+
+
+@app.route("/jobs/<job_id>")
+def get_jobs(job_id):
+    return json.dumps(Job.get_by_id(job_id).serialize())
+
+
+@app.route("/getAllJobTasks/<job_id>")
+@requires_auth
+def get_all_job_tasks():
+    pass
 
 @app.route('/logout')
 def logout():

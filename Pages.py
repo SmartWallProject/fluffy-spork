@@ -3,8 +3,8 @@ from Progress import Progress
 
 class Pages:
     def generate(self, name, parameters):
-        if self.hasattr(name):
-            return self.getattr(name)(parameters)
+        if hasattr(self, name):
+            return getattr(self, name)(parameters)
 
     def login_page(self, parameters):
         error_msg = parameters.get("error_msg", "No error...")
