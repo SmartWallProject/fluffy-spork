@@ -1,11 +1,10 @@
-.job-menu{
-    padding-top:150px;
+.job-menu {
+    padding-top: 150px;
     background: #FFFFFF;
     height: 100%;
-    
 }
 
-body{
+body {
     background: #FFFFFF !important;
 }
 
@@ -13,15 +12,22 @@ body{
     padding-left: 0 !important;
 }
 
-.job-points{
+.job-box a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.job-points {
     font-size: 1em !important;
     position: absolute;
     top: 0;
     right: 0;
 }
+
 .pad-box {
-         padding-top:150px;
+    padding-top: 150px;
 }
+
 .job-field {
     font-size: 0.75em;
 }
@@ -43,7 +49,7 @@ body{
     margin: 0;
     position: relative;
     display: block;
-    padding-left:0;
+    padding-left: 0;
 }
 
 .job-tag {
@@ -55,7 +61,6 @@ body{
 }
 
 .store-image-tag {
-    width:90px;
-    height:90px;
-
+    width: 90px;
+    height: 90px;
 }
