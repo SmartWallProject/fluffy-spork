@@ -20,6 +20,6 @@ app.config(function($routeProvider) {
         controller : 'jobController as controller'
     })
     .otherwise({    
-        templateUrl: 'html/error.html'
+        templateUrl: 'public/html/error.html'
     })
   });
