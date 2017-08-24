@@ -2,7 +2,7 @@
 
 angular.module('mainApp')
 .service('jobService', ['$resource', function($resource) {
-    let Job = $resource('api/job/:jobId', {jobId:'@id'});
+    let Job = $resource('/api/job/:jobId', {jobId:'@id'});
 
     //let UserJob = $resource('/user/jobs/:userJobId', {userJobid : '@id'});
     
