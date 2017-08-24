@@ -13,9 +13,10 @@
     position: absolute;
     top: 0;
     right: 0;
-
 }
-
+.pad-box {
+         padding-top:150px;
+}
 .job-field {
     font-size: 0.55em;
 }
@@ -23,8 +24,6 @@
 .job-desc {
     font-size: 0.4em;
 }
-
-
 
 .job-box {
     background: #DDDDDD;
