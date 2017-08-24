@@ -12,7 +12,6 @@ class User:
         self.tasks_progress = None
         self.data = None
         if self.username is not None:
-            print (self.username)
             self.data = query("SELECT * FROM users WHERE username = ?", [self.username], one=True)
             self.user_id = self.data['user_id']
             # self.tasks_progress = [Progress(task_progress) for task_progress in self.data['progress']]
@@ -21,7 +20,7 @@ class User:
         return self.username is not None
 
     @staticmethod
-    def log_out(self):
+    def log_out():
         session.pop('username', None)
 
     @staticmethod

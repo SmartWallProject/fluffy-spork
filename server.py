@@ -2,7 +2,7 @@ from enum import Enum
 from flask import Flask, session, redirect, url_for, request, send_from_directory
 import json
 
-from Job import Job, Task
+from Job import Job, Task, Status
 from user import User
 from Pages import Pages
 from functools import wraps
@@ -32,7 +32,7 @@ def requires_auth(f):
     def decorated(*args, **kwargs):
         user = User()
         if not user.logged_in():
-            return redirect(url_for("login"))
+            return redirect(url_for("/"))
 
         return f(*args, **kwargs)
 
@@ -44,7 +44,7 @@ def index():
     return open("public/main.html").read()
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['GET', 'POST'])
 @jsonf
 def login():
     session['username'] = "plesh"
@@ -61,7 +61,6 @@ def login():
             return {"status": "success"}
 
 
-
 @app.route('/dashboard')
 @requires_auth
 def dashboard():
@@ -69,7 +68,7 @@ def dashboard():
     template.generate("dashboard", {"user": user})
 
 
-@app.route("/user/info")
+@app.route("/api/user/info")
 @requires_auth
 @jsonf
 def user_info():
@@ -77,8 +76,8 @@ def user_info():
     return user.serialize()
 
 
-@app.route("/jobs/", defaults={"job_id": ""})
-@app.route("/jobs/<job_id>")
+@app.route("/api/job/", defaults={"job_id": ""})
+@app.route("/api/job/<job_id>")
 @jsonf
 def get_jobs(job_id):
     if job_id is "":
@@ -90,15 +89,25 @@ def get_jobs(job_id):
     else:
         return Job.get_by_id(job_id).serialize()
 
-@app.route("/jobs/<job_id>/tasks")
+
+@app.route("/api/job/<job_id>/tasks")
 @jsonf
 def get_tasks_by_job_id(job_id):
     return [task.serialize() for task in Task.get_by_job_id(job_id)]
 
-@app.route("/getAllJobTasks/<job_id>")
+
+@app.route("/api/tasks/<task_id>/status")
 @requires_auth
-def get_all_job_tasks():
-    pass
+@jsonf
+def get_task_status_for_user(task_id):
+    return [status.serialize() for status in Status.get_user_status_by_task_id(task_id)]
+
+
+@app.route("/api/tasks/<task_id>/send")
+@requires_auth
+def get_code_result(task_id):
+    return Task.get_by_id(task_id).run(request.form["code"])
+
 
 @app.route('/logout')
 def logout():
