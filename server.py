@@ -2,14 +2,12 @@ from enum import Enum
 from flask import Flask, session, redirect, url_for, request, send_from_directory
 import json
 
-from Job import Job, Task, Status
+from Items import *
 from user import User
-from Pages import Pages
 from functools import wraps
 
 app = Flask(__name__, static_url_path='/public/')
 app.secret_key = 'A0Zz91j/3yX l~Xbq!jmN]LWX/,?RT'
-template = Pages()
 
 
 class Errors(Enum):
@@ -20,12 +18,14 @@ class Errors(Enum):
 def send_js(path):
     return send_from_directory('public', path)
 
+
 def jsonf(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         return json.dumps(f(*args, **kwargs), indent=4)
 
     return decorated
+
 
 def requires_auth(f):
     @wraps(f)
@@ -75,12 +75,6 @@ def register():
             return {"status": "success"}
 
 
-@app.route('/dashboard')
-@requires_auth
-def dashboard():
-    user = User()
-    template.generate("dashboard", {"user": user})
-
 
 @app.route("/api/user/info")
 @requires_auth
@@ -110,17 +104,23 @@ def get_tasks_by_job_id(job_id):
     return [task.serialize() for task in Task.get_by_job_id(job_id)]
 
 
-@app.route("/api/tasks/<task_id>/status")
+@app.route("/api/tasks/<task_id>/<action>")
 @requires_auth
 @jsonf
-def get_task_status_for_user(task_id):
-    return [status.serialize() for status in Status.get_user_status_by_task_id(task_id)]
+def task_handler(task_id, action):
+    if action == "status":
+        return [status.serialize() for status in Status.get_user_status_by_task_id(task_id)]
+    elif action == "examples":
+        return [example.serialize() for example in Example.get_examples_by_task_id(task_id)]
+    elif action == "send":
+        return Task.get_by_id(task_id).run(request.form["code"])
 
 
-@app.route("/api/tasks/<task_id>/send")
-@requires_auth
-def get_code_result(task_id):
-    return Task.get_by_id(task_id).run(request.form["code"])
+@app.route("/api/store/list")
+@jsonf
+def store_list():
+    return [item.serialize() for item in Store.get_all_store_items()]
+
 
 
 @app.route('/logout')
