@@ -1,0 +1,23 @@
+.job-field {
+    font-size: 0.75em;
+}
+
+.job-box {
+    background: #DDDDDD;
+    margin: 5px;
+}
+
+.job-tags ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    line-height: 110%;
+}
+
+.job-tag {
+    display: inline;
+    font-size: 0.5em;
+    padding: 5px;
+    margin-right: 3px;
+    color: #282828;
+}
