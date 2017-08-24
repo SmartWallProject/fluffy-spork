@@ -88,3 +88,33 @@ class Status:
         user = User()
         props = query("SELECT * FROM user_status WHERE task_id = ? AND user_id = ?", [task_id, user.user_id])
         return map(Status, props)
+
+
+class Example:
+    def __init__(self, props):
+        self.request = props['request']
+        self.response = props['response']
+
+    def serialize(self):
+        return {"request": self.request, "response": self.response}
+
+    @staticmethod
+    def get_examples_by_task_id(task_id):
+        props = query("SELECT * FROM examples WHERE task_id = ?", [task_id])
+        return map(Example, props)
+
+
+class Store:
+    def __init__(self, props):
+        self.item_name = props['item_name']
+        self.item_description = props['item_description']
+        self.points_cost = props['points_cost']
+        self.image_path = "public/store_images/" + props['image_path'] + ".png"
+
+    def serialize(self):
+        return {"item_name": self.item_name, "item_description": self.item_description, "points_cost": self.points_cost, "image_path": self.image_path}
+
+    @staticmethod
+    def get_all_store_items():
+        props = query("SELECT * FROM store_items")
+        return map(Store, props)
