@@ -4,13 +4,13 @@ angular.module('mainApp')
 .controller('jobsController', ['jobService', function(jobService) {
     let self = this;
     self.jobList = [];
-
+    
     jobService.getAllJobs()
-    .then(function(res, data) {
-        console.log('Received reponse: ' + res + ' ' + data);
-        self.jobList = data.jobList;
+    .then(function(res) {
+        console.log('Received reponse: ' + res);
+        self.jobList = res;
     })
-    .catch(function(res, data) {
-        console.error('Received reponse: ' + res + ' ' + data);
+    .catch(function(res) {
+        console.error('Received reponse: ' + res);
     })
 }])

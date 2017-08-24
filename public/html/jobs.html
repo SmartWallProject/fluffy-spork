@@ -1,2 +1,11 @@
-<div ng-show='controller.jobList.count == 0'>
+<div ng-hide='controller.jobList.length==0'>
+    <ul>
+    <li ng-repeat="job in controller.jobList">
+        <div>
+            {{job.name}}
+            {{job.description}}
+            {{job.tags}}
+        </div>
+    </li>
+    </ul>
 </div>
