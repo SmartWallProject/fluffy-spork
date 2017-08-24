@@ -6,7 +6,6 @@ from functools import wraps
 
 app = Flask(__name__)
 app.secret_key = 'A0Zz91j/3yX l~Xbq!jmN]LWX/,?RT'
-user = None
 template = Pages()
 
 
@@ -50,11 +49,12 @@ def login():
 
 @app.route('/dashboard')
 @requires_auth
-def main_page():
-    pass
+def dashboard():
+    user = User()
+    template.generate("dashboard", {"user": user})
 
 
 @app.route('/logout')
 def logout():
-    user.log_out()
+    User.log_out()
     return redirect(url_for('/'))
