@@ -1,5 +1,27 @@
+.job-menu{
+    padding-top:150px;
+    background: #18bc9c;
+    height: 100%;
+}
+
+.no-padding-left {
+    padding-left: 0 !important;
+}
+
+.job-points{
+    font-size: 0.5em !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
 .job-field {
     font-size: 0.55em;
+}
+
+.job-desc {
+    font-size: 0.4em;
 }
 
 
@@ -7,12 +29,16 @@
 .job-box {
     background: #DDDDDD;
     margin-left: 20px;
+    max-height: 150px;
+    padding: 10px;
 }
 
 .job-tags ul {
     list-style-type: none;
     margin: 0;
     position: relative;
+    display: block;
+    padding-left:0;
 }
 
 .job-tag {
@@ -24,5 +50,5 @@
 }
 
 body {
-    padding-top:150px;
+    
 }
