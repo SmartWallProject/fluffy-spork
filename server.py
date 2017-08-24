@@ -76,8 +76,8 @@ def user_info():
     return user.serialize()
 
 
-@app.route("/api/jobs/", defaults={"job_id": ""})
-@app.route("/api/jobs/<job_id>")
+@app.route("/api/job/", defaults={"job_id": ""})
+@app.route("/api/job/<job_id>")
 @jsonf
 def get_jobs(job_id):
     if job_id is "":
@@ -90,7 +90,7 @@ def get_jobs(job_id):
         return Job.get_by_id(job_id).serialize()
 
 
-@app.route("/api/jobs/<job_id>/tasks")
+@app.route("/api/job/<job_id>/tasks")
 @jsonf
 def get_tasks_by_job_id(job_id):
     return [task.serialize() for task in Task.get_by_job_id(job_id)]
@@ -101,6 +101,12 @@ def get_tasks_by_job_id(job_id):
 @jsonf
 def get_task_status_for_user(task_id):
     return [status.serialize() for status in Status.get_user_status_by_task_id(task_id)]
+
+
+@app.route("/api/tasks/<task_id>/send")
+@requires_auth
+def get_code_result(task_id):
+    return Task.get_by_id(task_id).run(request.form["code"])
 
 
 @app.route('/logout')
