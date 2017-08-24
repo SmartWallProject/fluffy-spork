@@ -7,7 +7,7 @@ from user import User
 from Pages import Pages
 from functools import wraps
 
-app = Flask(__name__, static_url_path='/public')
+app = Flask(__name__, static_url_path='/public/')
 app.secret_key = 'A0Zz91j/3yX l~Xbq!jmN]LWX/,?RT'
 template = Pages()
 
@@ -15,6 +15,10 @@ template = Pages()
 class Errors(Enum):
     WRONG_USERNAME_PASSWORD = 1
 
+
+@app.route('/public/<path:path>')
+def send_js(path):
+    return send_from_directory('public', path)
 
 def requires_auth(f):
     @wraps(f)
