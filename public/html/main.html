@@ -20,7 +20,7 @@
             
         </head>
         
-        <body>
+        <body ng-controller="mainController">
             <!-- navbar -->
             <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
                     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,12 +49,15 @@
                         </li>
                       </ul>
                       <form class="form-inline my-2 my-md-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <input ng-model="this.username" class="form-control mr-sm-2" type="text" placeholder="Username">
+                        <input ng-model="this.password" class="form-control mr-sm-2" type="password" placeholder="Password">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</button>
                       </form>
                     </div>
                   </nav>
-            
+
+                  <ng-route/>
         </body>
         
         </html>

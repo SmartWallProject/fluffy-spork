@@ -4,10 +4,10 @@ let app = angular.module('mainApp', ['ngRoute', 'ngResource']);
 
 app.config(function($routeProvider) {
     $routeProvider
-    .when("/", {
-      templateUrl : 'public/html/index.html'
+    .when('/', {
+      templateUrl : 'html/home.html'
     })
-    .otherwise({
-        templateUrl: 'public/html/error.html'
+    .otherwise({    
+        templateUrl: 'html/error.html'
     })
   });
