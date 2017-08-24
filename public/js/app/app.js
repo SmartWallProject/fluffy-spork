@@ -8,8 +8,8 @@ app.config(function($routeProvider) {
       templateUrl : 'public/startbootstrap-freelancer-gh-pages/index.html'
     })
     .when('/myJobs', {
-        templateUrl : 'html/userJobs.html',
-        controller : 'userJobsController as controller'
+        templateUrl : 'public/html/jobs.html',
+        controller : 'myJobsController as controller'
     })
     .when('/jobs', {
         templateUrl : 'public/html/jobs.html',
