@@ -7,16 +7,15 @@ app.config(function($routeProvider) {
     .when('/', {
       templateUrl : 'public/startbootstrap-freelancer-gh-pages/index.html'
     })
-    .when('/myJobs', {
-        templateUrl : 'html/userJobs.html',
-        controller : 'userJobsController as controller'
-    })
-    .when('/jobs', {
+    .when('/api/jobs', {
         templateUrl : 'public/html/jobs.html',
         controller : 'jobsController as controller'
-
+        
+    })
+    .when('/api/jobs/:jobId', {
+        controller : 'jobController as controller'
     })
     .otherwise({    
-        templateUrl: 'html/error.html'
+        templateUrl: 'public/html/error.html'
     })
   });
