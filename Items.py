@@ -49,10 +49,8 @@ class Task:
 
     def run(self, code):
         tester = import_module(os.path.join("testers", self.tester_file))
-        try:
-            results = tester.run_test(code)
-        except:
-            results = ["Exception was thrown"]
+
+        results = tester.run_test(code)
 
         if len(results) == 0:
             return self.after_complete

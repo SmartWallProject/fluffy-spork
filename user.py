@@ -30,13 +30,14 @@ class User:
 
     @staticmethod
     def add_user(username, password):
-        print("INSERTING #########")
         query("INSERT INTO users (username, password) VALUES (?, ?)", [username, password])
 
     def serialize(self):
         return {"username": self.username}
 
     def take_job(self, job_id):
+        from Items import Job
+
         user_jobs = Job.get_by_user_id(self.user_id)
         if any([job_id == job.job_id for job in user_jobs]):
             return False
@@ -46,6 +47,8 @@ class User:
             return False
 
         query("INSERT INTO user_jobs (user_id, job_id) VALUES (?, ?)", [self.user_id, job_id])
+
+        return True
 
     def drop_job(self, job_id):
         query("DELETE FROM user_jobs WHERE user_id = ? AND job_id = ?", [self.user_id, job_id])
