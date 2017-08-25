@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mainApp')
-    .controller('jobController', ['jobService', '$routeParams', '$sce', function (jobService, $routeParams, $sce) {
+    .controller('jobController', ['jobService', '$routeParams', '$sce', "taskService" ,function (jobService, $routeParams, $sce, taskService) {
         let self = this;
         let jobId = $routeParams.jobId;
         
@@ -24,4 +24,15 @@ angular.module('mainApp')
             .catch(function (res) {
                 console.error('Received reponse: ' + res);
             })
+        
+        this.submit_code = function(task_id, code) {
+            return taskService.submitTaskSolution(task_id, code)
+            .then(function(res) {
+                self.taskMessage = res.msg;
+            })
+            .catch(function(res){
+                self.taskMessage = res.msg;  
+            })
+            
+        }
     }])

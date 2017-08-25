@@ -39,7 +39,9 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                                 <div id="bla_{{task.task_id}}" class="collapse" role="tabpanel" aria-labelledby="task_{{task.task_id}}">
                                     <div class="card-block">
                                         <div ng-bind-html="task.description"> </div>
-<!--                                        <div>Example: {{task.description}}</div>-->
+                                        
+                                        <textarea ng-model="task.current_code"></textarea>
+                                        <button type="button" ng-click="controller.submit_code(task.task_id, task.current_code)" class="btn btn-primary btn-sm">Small button</button>
                                     </div>
                                 </div>
                             </div>
