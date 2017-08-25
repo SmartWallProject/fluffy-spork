@@ -22,7 +22,13 @@ def send_js(path):
 def jsonf(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        return json.dumps(f(*args, **kwargs), indent=4)
+        res = f(*args, **kwargs)
+        if type(res) is tuple:
+            res, code = res
+        else:
+            code = 200
+
+        return json.dumps(res, indent=4), code
 
     return decorated
 
@@ -117,7 +123,11 @@ def handle_jobs(job_id, action):
 @jsonf
 def task_handler(task_id, action):
     if action == "status":
-        return [status.serialize() for status in Status.get_user_status_by_task_id(task_id)]
+        user_status = Status.get_user_status_by_task_id(task_id)
+        if not user_status:
+            return {}, 400
+        else:
+            return user_status.serialize()
     elif action == "examples":
         return [example.serialize() for example in Example.get_examples_by_task_id(task_id)]
     elif action == "send":
