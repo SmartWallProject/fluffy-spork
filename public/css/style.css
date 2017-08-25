@@ -14,6 +14,16 @@
     padding-top: 30px;
 }
 
+.assign-btn {
+    margin-bottom:1em;
+    margin-top:0em;
+}
+
+.drop-btn {
+    margin-bottom:1em;
+    margin-top:0em;
+}
+
 .job-menu a{
     color: inherit;
     text-decoration: inherit;
