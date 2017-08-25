@@ -3,6 +3,7 @@
 angular.module('mainApp')
     .service('taskService', ['$resource', function ($resource) {
         let Task = $resource('/api/task/:taskId', {taskId:'@id'});
+        let TaskSubmit = $resource('/api/task/:taskId/send', {taskId:'@id'});
 
         return {
 
@@ -11,8 +12,8 @@ angular.module('mainApp')
 
             },
 
-            submitTaskSolution: function (taskSolution) {
-
+            submitTaskSolution: function (task_id, taskSolution) {
+                return TaskSubmit.save({id: task_id, code: taskSolution}).$promise;
             }
 
         }
