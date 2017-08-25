@@ -10,8 +10,8 @@ class Job:
         self.name = props['job_name']
         self.points = props['job_points']
         self.tags = list(filter(lambda f: f != "", (map(str.strip, props['tags'].split(",")))))
-        self.description = props['description']
-        self.text_before_tasks = props['text_before_tasks']
+        self.description = props['description'].replace("\n", "<br>")
+        self.text_before_tasks = props['text_before_tasks'].replace("\n", "<br>")
 
     def serialize(self):
         return {"job_id": self.job_id, "name": self.name, "points": self.points, "tags": self.tags, "description": self.description,
@@ -37,10 +37,10 @@ class Task:
     def __init__(self, props):
         self.task_id = props['task_id']
         self.name = props['task_name']
-        self.description = props['description']
+        self.description = props['description'].replace("\n", "<br>")
         self.default_code = props['default_code']
         self.hints = props['hints']
-        self.after_complete = props['after_complete']
+        self.after_complete = props['after_complete'].replace("\n", "<br>")
         self.tester_file = props['tester_file']
 
     def serialize(self):
