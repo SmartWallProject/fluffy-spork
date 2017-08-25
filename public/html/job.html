@@ -48,7 +48,6 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                                             <br>
                                             <button type="button" ng-click="controller.submit_code(task, 'editor_' + task.task_id)"
                                              class="btn btn-primary btn-sm">Submit</button>
-                                             <br> 
                                              <span class="alert alert-success" ng-show="task.solutionValid" ng-bind-html="task.message"></span>
                                              <span class="alert alert-error" ng-show="task.solutionInvalid"  ng-bind-html="task.message"></span>
 
