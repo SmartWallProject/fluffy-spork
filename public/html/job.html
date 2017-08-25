@@ -33,7 +33,7 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                             <div class="card">
                                 <div class="card-header" role="tab" id="task_{{task.task_id}}">
                                     <h5 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#bla_{{task.task_id}}" href="" aria-expanded="false" aria-controls="bla_{{task.task_id}}">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#bla_{{task.task_id}}" href="" aria-expanded="false" aria-controls="bla_{{task.task_id}}" ng-click="fix_editor('editor_' + task.task_id)">
                                             {{task.name}}
                                         </a>
                                     </h5>
@@ -41,7 +41,9 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                                 <div id="bla_{{task.task_id}}" class="collapse" role="tabpanel" aria-labelledby="task_{{task.task_id}}">
                                     <div class="card-block">
                                         <div ng-bind-html="task.description"> </div>
-<!--                                        <div>Example: {{task.description}}</div>-->
+                                        <div id="editor_{{task.task_id}}" style="height:300px; width:80%; margin:auto" >{{task.default_code}}</div>
+                                        <br>
+                                        <button type="button" ng-click="controller.submit_code(task.task_id, 'editor_' + task.task_id)" class="btn btn-primary btn-sm">Small button</button>
                                     </div>
                                 </div>
                             </div>
