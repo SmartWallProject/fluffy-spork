@@ -5,7 +5,9 @@ let app = angular.module('mainApp', ['ngRoute', 'ngResource']);
 app.config(function($routeProvider) {
     $routeProvider
     .when('/', {
-      templateUrl : 'public/startbootstrap-freelancer-gh-pages/index.html'
+      templateUrl : 'public/startbootstrap-freelancer-gh-pages/index.html',
+      controller : 'homeController as controller'
+
     })
     .when('/myJobs', {
         templateUrl : 'public/html/jobs.html',
