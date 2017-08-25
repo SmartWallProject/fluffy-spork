@@ -56,7 +56,7 @@ class Task:
         if len(results) == 0:
             return self.after_complete
         else:
-            return "Error: <br />" + "<br />".join(results), 403
+            return "Error: <br />" + "<br />".join(results), 400
 
 
     @staticmethod
