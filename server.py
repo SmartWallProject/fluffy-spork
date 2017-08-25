@@ -133,7 +133,10 @@ def task_handler(task_id, action):
     elif action == "examples":
         return [example.serialize() for example in Example.get_examples_by_task_id(task_id)]
     elif action == "send":
-        return Task.get_by_id(task_id).run(request.form["code"])
+        print("Action SEND")
+        task = Task.get_by_id(task_id)
+        print("Got task")
+        return task.run(request.json["code"])
 
 
 @app.route("/api/store/list")
