@@ -1,7 +1,16 @@
+#open-jobs {
+    padding-top: 40px;
+}
+
 .job-menu {
     padding-top: 150px;
     background: #FFFFFF;
     height: 100%;
+}
+
+.job-menu-unpadded {
+    background: #FFFFFF;
+    padding-top: 30px;
 }
 
 body {

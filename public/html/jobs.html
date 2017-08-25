@@ -6,16 +6,16 @@
                     <a href="#/job/{{job.job_id}}">
                         <div class="row">
                             <div class="col-md-8 no-padding-left">
-                                <h5 class="job-title">{{job.name}}</h5>
+                                <h5 ng-show="job.name" class="job-title">{{job.name}}</h5>
                             </div>
-                            <div class="col-md-4"> <span class="badge badge-primary job-points"> {{job.points}} Points</span>
+                            <div class="col-md-4"> <span ng-show="job.points" class="badge badge-primary job-points"> {{job.points}} LFT</span>
                             </div>
-                            <div class="job-desc">
+                            <div ng-show="job.description" class="job-desc">
                                 {{job.description}}
                             </div>
                             <br>
                             <br>
-                            <div class="job-tags">
+                            <div ng-show="job.tags" class="job-tags">
                                 <ul>
                                     <li ng-repeat="tag in job.tags" class="job-tag badge badge-success">
                                         {{tag}}
