@@ -53,11 +53,10 @@ def index():
 @app.route('/api/login', methods=['POST', "GET"])
 @jsonf
 def login():
-    session['username'] = "plesh"
 
-    if request.method == 'POST' and "username" in request.form and "password" in request.form:
-        username = request.form['username']
-        password = request.form['password']
+    if request.method == 'POST' and "username" in request.json and "password" in request.json:
+        username = request.json['username']
+        password = request.json['password']
 
         if not User.verify_login(username, password):
             return {"status": "error", "reason": "wrong_username_password"}
@@ -69,11 +68,11 @@ def login():
 @app.route('/api/register', methods=['POST'])
 @jsonf
 def register():
-    if request.method == 'POST' and "username" in request.form and "password" in request.form:
-        username = request.form['username']
-        password = request.form['password']
+    if request.method == 'POST' and "username" in request.json and "password" in request.json:
+        username = request.json['username']
+        password = request.json['password']
 
-        if not User.username_exists(username):
+        if User.username_exists(username):
             return {"status": "error", "reason": "Username already exists"}
         else:
             User.add_user(username, password)

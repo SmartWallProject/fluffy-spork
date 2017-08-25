@@ -20,6 +20,8 @@
   <script src="public/js/app/app.js"></script>
   <script src="public/js/app/controllers/mainController.js">
   </script>
+  <script src="public/js/app/services/loginService.js">
+  </script>
   <script src="public/js/app/controllers/jobsController.js">
   </script>
   <script src="public/js/app/services/jobService.js">
@@ -63,7 +65,7 @@
                     <i class="fa fa-bars"></i>
                   </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto" ng-show="is_logged_in">
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#/myJobs">My Jobs</a>
           </li>
@@ -72,6 +74,28 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            &nbsp;&nbsp;
+
+          </li>
+
+
+        </ul>
+        <ul class="navbar-nav ml-auto" ng-hide="is_logged_in">
+          <li class="nav-item">
+<div class="input-group" style="width:150px;">
+  <span class="input-group-addon" id="basic-addon1">@</span>
+  <input name="username" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" ng-model="login.username">
+</div>
+          </li><li style="margin-left:10px;">
+<div class="input-group" style="width:150px;">
+  <span class="input-group-addon" id="basic-addon1" style="width:41.7px;">#</span>
+  <input name="password" type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1" ng-model="login.password">
+</div>
+        </li><li style="margin-left:10px;">
+             <input type="button" value="Login" class="btn btn-info" ng-click="login_button()">
+            <input type="button" value="Register" class="btn btn-info" ng-click="register_button()">
           </li>
         </ul>
       </div>
