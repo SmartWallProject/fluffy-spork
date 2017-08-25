@@ -48,14 +48,15 @@ class Task:
                 "hints": self.hints, "examples": [ex.serialize() for ex in Example.get_examples_by_task_id(self.task_id)]}
 
     def run(self, code):
-        tester = import_module(os.path.join("testers", self.tester_file))
+        print("Running " + self.tester_file)
+        from testers import test_hello_world as tester
 
         results = tester.run_test(code)
 
         if len(results) == 0:
             return self.after_complete
         else:
-            return "Error: <br />" + "<br />".join(results), 400
+            return "Error: <br />" + "<br />".join(results), 403
 
 
     @staticmethod
