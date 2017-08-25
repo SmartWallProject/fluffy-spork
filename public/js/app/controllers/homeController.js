@@ -46,10 +46,10 @@ angular.module('mainApp')
                             jobList.push({description: "Explore and assign for new Jobs"});
                         }
                         if (placeholderIndex == 1){
-                            jobList.push({description: "Complete jobs to earn LFTs"});
+                            jobList.push({description: "Complete jobs to earn ʟҒᴛ"});
                         }
                         if (placeholderIndex == 2) {
-                            jobList.push({description: "Buy goodies using your LFTs"});
+                            jobList.push({description: "Buy goodies using your ʟҒᴛ"});
                         }
                         placeholderIndex++;
                     }
@@ -58,7 +58,23 @@ angular.module('mainApp')
 
             })
             .catch(function(res) {
-                console.error("Somthing went wrong requesting jobs.")
+                console.log("Somthing went wrong requesting jobs.")
+                 let jobList = [];
+                 let placeholderIndex = 0;
+                 while (jobList.length < 3){
+                        if (placeholderIndex == 0){
+                            jobList.push({description: "Explore and assign for new Jobs"});
+                        }
+                        if (placeholderIndex == 1){
+                            jobList.push({description: "Complete jobs to earn ʟҒᴛ"});
+                        }
+                        if (placeholderIndex == 2) {
+                            jobList.push({description: "Buy goodies using your ʟҒᴛ"});
+                        }
+                        placeholderIndex++;
+                    }
+                
+                self.jobList = jobList;
             })
         };
         setPendingTasks();
