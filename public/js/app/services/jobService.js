@@ -12,6 +12,9 @@ angular.module('mainApp')
         let TakeJob = $resource('/api/job/:jobId/take', {
             jobId: '@id'
         });
+        let DropJob = $resource('/api/job/:jobId/drop', {
+            jobId: '@id'
+        })
 
 
         return {
@@ -33,6 +36,11 @@ angular.module('mainApp')
             },
             assignJobToMe: function (jobId) {
                 return TakeJob.get({
+                    jobId: jobId
+                }).$promise;
+            },
+            dropJob: function (jobId) {
+                return DropJob.get({
                     jobId: jobId
                 }).$promise;
             }

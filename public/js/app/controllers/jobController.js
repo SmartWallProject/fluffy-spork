@@ -6,29 +6,40 @@ angular.module('mainApp')
         let jobId = $routeParams.jobId;
         
         this.isAssignable = false;
-        this.isRemoveable = false;
+        this.isRemovable = false;
 
         jobService.getMyJobs().then(function(res) {
             for (let job of res){
                 if (job.job_id == jobId){
                     self.isAssignable = false;
-                    self.isRemoveable = true;
+                    self.isRemovable = true;
                     return;
                 }
             }
             self.isAssignable = true;
-            self.isRemoveable = false;
+            self.isRemovable = false;
         })
 
 
         this.assignToMe = function() {
             return jobService.assignJobToMe(jobId)
             .then(function(res) {
-                self.isRemoveable = true;
+                self.isRemovable = true;
                 self.isAssignable = false;
             })
             .catch(function(res) {
                 console.error("Failed assigning job to user.");
+            });
+        }
+
+        this.dropJob = function() {
+            return jobService.dropJob(jobId)
+            .then(function(res){
+                self.isRemovable = false;
+                self.isAssignable = true;
+            })
+            .catch(function(res) {
+                console.error("Failed dropping job from user.");
             });
         }
 
@@ -59,13 +70,17 @@ angular.module('mainApp')
             .catch(function (res) {
                 console.error('Received reponse: ' + res);
             })
-        this.submit_code = function(task_id, editor_id) {
+        this.submit_code = function(task, editor_id) {
             var code = ace.edit(editor_id).getValue();
-            return taskService.submitTaskSolution(task_id, code)
+            return taskService.submitTaskSolution(task.task_id, code)
                 .then(function (res) {
+                    task.solutionInvalid = false;
+                    task.solutionValid = true;
                     self.taskMessage = res.msg;
                 })
                 .catch(function (res) {
+                    task.solutionInvalid = true;
+                    task.solutionValid = false;
                     self.taskMessage = res.msg;
                 });
         }
