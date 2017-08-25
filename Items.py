@@ -1,4 +1,5 @@
 from Database import query
+from testers import Tester
 from user import User
 from importlib import import_module
 import os
@@ -49,14 +50,18 @@ class Task:
 
     def run(self, code):
         print("Running " + self.tester_file)
-        from testers import test_hello_world as tester
+
+        if self.tester_file == "test_hello_world.py":
+            from testers import test_hello_world as tester
+        else:
+            assert False
 
         results = tester.run_test(code)
 
         if len(results) == 0:
-            return self.after_complete
+            return self.after_complete, 200
         else:
-            return "Error: <br />" + "<br />".join(results), 403
+            return "Error: <br />" + "<br />".join(results), 400
 
 
     @staticmethod
@@ -78,9 +83,6 @@ class Status:
 
     def serialize(self):
         return {"status": self.status, "last_code_entered" : self.last_code_entered, "last_result_message_shown": self.last_result_message_shown}
-
-    def run(self, code):
-        pass
 
     @staticmethod
     def get_user_status_by_task_id(task_id):
