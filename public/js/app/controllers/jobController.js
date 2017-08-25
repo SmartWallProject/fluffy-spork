@@ -4,6 +4,34 @@ angular.module('mainApp')
     .controller('jobController', ['jobService', 'taskService', '$routeParams', '$sce', '$scope', function (jobService, taskService, $routeParams, $sce, $scope) {
         let self = this;
         let jobId = $routeParams.jobId;
+        
+        this.isAssignable = false;
+        this.isRemoveable = false;
+
+        jobService.getMyJobs().then(function(res) {
+            for (let job of res){
+                if (job.job_id == jobId){
+                    self.isAssignable = false;
+                    self.isRemoveable = true;
+                    return;
+                }
+            }
+            self.isAssignable = true;
+            self.isRemoveable = false;
+        })
+
+
+        this.assignToMe = function() {
+            return jobService.assignJobToMe(jobId)
+            .then(function(res) {
+                self.isRemoveable = true;
+                self.isAssignable = false;
+            })
+            .catch(function(res) {
+                console.error("Failed assigning job to user.");
+            });
+        }
+
 
         $scope.fix_editor = function fix_editor(id)
                     {
