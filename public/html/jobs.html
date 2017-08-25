@@ -1,23 +1,30 @@
 <div ng-hide='controller.jobList.length==0'>
+    <div class="container">
         <div class="row job-menu">
-            <div ng-repeat="job in controller.jobList" class="col-md-3 job-box alert alert-secondary">
-                <div class = "row"> 
-                    <div class="col-md-8 no-padding-left"> <h5 class="job-title">{{job.name}}</h5> </div>
-                    <div class="col-md-4"> <span class = "badge badge-primary job-points"> {{job.points}} Points</span>
-                </div>
-                <div class="job-desc">
-                    {{job.description}}
-                </div>
-                <br>
-                <br>
-                <div class="job-tags">
-                    <ul>
-                        <li ng-repeat="tag in job.tags" class="job-tag badge badge-success">
-                            {{tag}}
-                        </li>
-                    </ul>
+            <div ng-repeat="job in controller.jobList" class="col-lg-3 job-box alert alert-secondary">
+                <div class="container">
+                    <a href="#/job/{{job.job_id}}">
+                        <div class="row">
+                            <div class="col-md-8 no-padding-left">
+                                <h5 class="job-title">{{job.name}}</h5>
+                            </div>
+                            <div class="col-md-4"> <span class="badge badge-primary job-points"> {{job.points}} Points</span>
+                            </div>
+                            <div class="job-desc">
+                                {{job.description}}
+                            </div>
+                            <br>
+                            <br>
+                            <div class="job-tags">
+                                <ul>
+                                    <li ng-repeat="tag in job.tags" class="job-tag badge badge-success">
+                                        {{tag}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
-
-</div>
+    </div>
