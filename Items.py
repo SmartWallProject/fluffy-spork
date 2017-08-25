@@ -45,7 +45,7 @@ class Task:
 
     def serialize(self):
         return {"task_id": self.task_id, "name": self.name, "description": self.description, "default_code": self.default_code,
-                "hints": self.hints}
+                "hints": self.hints, "examples": [ex.serialize() for ex in Example.get_examples_by_task_id(self.task_id)]}
 
     def run(self, code):
         tester = import_module(os.path.join("testers", self.tester_file))

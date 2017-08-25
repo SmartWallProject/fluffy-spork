@@ -14,7 +14,7 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
     <div class="row">
         <div class="col">
             <div class="jumbotron">
-                <h1 class="display-3">{{controller.job.name}} <span class="badge badge-primary">{{controller.job.points}}</span></h1>
+                <h1 class="display-3">{{controller.job.name}} <span class="badge badge-primary">{{controller.job.points}}<p>ʟғᴛ</p></span></h1>
                 <div class="row">
                     <div ng-repeat="tag in controller.job.tags">
                         <div class="col ">    
@@ -23,8 +23,9 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                     </div>
                 </div>
                 <p class="lead">{{controller.job.description}}</p>
-                <p class="lead">{{controller.job.text_before_tasks}}</p>
-                <div class="row">
+                <p class="lead"><div ng-bind-html="controller.job.text_before_tasks"> </div></p>
+            <div class="row">
+                <div class="col">
                     <div id="accordion" role="tablist" aria-multiselectable="true">
                         <div ng-repeat="task in controller.job.tasks">
                             <div class="card">
@@ -37,17 +38,19 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                                 </div>
                                 <div id="bla_{{task.task_id}}" class="collapse" role="tabpanel" aria-labelledby="task_{{task.task_id}}">
                                     <div class="card-block">
-                                        {{task.description}}
+                                        <div ng-bind-html="task.description"> </div>
+<!--                                        <div>Example: {{task.description}}</div>-->
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
             </div>
+
         </div>
     </div>
+</div>
 </div>
