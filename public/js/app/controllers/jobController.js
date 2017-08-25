@@ -76,12 +76,13 @@ angular.module('mainApp')
                 .then(function (res) {
                     task.solutionInvalid = false;
                     task.solutionValid = true;
-                    task.message = $sce.trustAsHtml(res.data);
+                    task.message = $sce.trustAsHtml(res.msg);
                 })
                 .catch(function (res) {
                     task.solutionInvalid = true;    
                     task.solutionValid = false;
-                    task.message = $sce.trustAsHtml(res.data);
+
+                    task.message = $sce.trustAsHtml(res.data.msg);
                 });
         }
     }])
