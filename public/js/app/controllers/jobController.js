@@ -49,6 +49,7 @@ angular.module('mainApp')
                         var editor = ace.edit(id);
                         editor.setTheme("ace/theme/monokai");
                         editor.getSession().setMode("ace/mode/python");
+                        editor.setFontSize(16);
                     };
 
         jobService.getJobById(jobId)

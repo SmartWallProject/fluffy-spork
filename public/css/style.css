@@ -38,6 +38,10 @@ body {
     background: #FFFFFF !important;
 }
 
+.job-view {
+    padding-top: 2em !important;
+}
+
 .no-padding-left {
     padding-left: 0 !important;
 }

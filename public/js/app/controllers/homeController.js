@@ -46,10 +46,10 @@ angular.module('mainApp')
                             jobList.push({description: "Explore and assign for new Jobs"});
                         }
                         if (placeholderIndex == 1){
-                            jobList.push({description: "Complete jobs to earn ʟҒᴛ"});
+                            jobList.push({description: "Complete jobs to earn LFT"});
                         }
                         if (placeholderIndex == 2) {
-                            jobList.push({description: "Buy goodies using your ʟҒᴛ"});
+                            jobList.push({description: "Buy goodies using your LFT"});
                         }
                         placeholderIndex++;
                     }
@@ -66,10 +66,10 @@ angular.module('mainApp')
                             jobList.push({description: "Explore and assign for new Jobs"});
                         }
                         if (placeholderIndex == 1){
-                            jobList.push({description: "Complete jobs to earn ʟҒᴛ"});
+                            jobList.push({description: "Complete jobs to earn LFT"});
                         }
                         if (placeholderIndex == 2) {
-                            jobList.push({description: "Buy goodies using your ʟҒᴛ"});
+                            jobList.push({description: "Buy goodies using your LFT"});
                         }
                         placeholderIndex++;
                     }

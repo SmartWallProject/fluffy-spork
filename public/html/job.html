@@ -13,10 +13,10 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
 <div class="container pad-box">
     <div class="row">
         <div class="col">
-            <div class="jumbotron">
-                <h1 class="display-3">{{controller.job.name}} <span class="badge badge-primary">{{controller.job.points}}<p>ʟғᴛ</p></span></h1>
+            <div class="jumbotron job-view">
                 <button ng-show="controller.isAssignable" class="btn btn-info assign-btn" ng-click="controller.assignToMe()">Assign to me</button>
                 <button ng-show="controller.isRemovable" class="btn btn-danger drop-btn" ng-click="controller.dropJob()">Drop Job</button>
+                <h1 class="display-3">{{controller.job.name}} <span class="badge badge-primary">{{controller.job.points}}<p>LFT</p></span></h1>
                 <div class="row">
                     <div ng-repeat="tag in controller.job.tags">
                         <div class="col ">
