@@ -133,10 +133,16 @@ def task_handler(task_id, action):
     elif action == "examples":
         return [example.serialize() for example in Example.get_examples_by_task_id(task_id)]
     elif action == "send":
-        print("Action SEND")
+        user = User()
         task = Task.get_by_id(task_id)
-        print("Got task")
-        return task.run(request.json["code"])
+        resp, code = task.run(request.json["code"])
+        current_status = Status.get_user_status_by_task_id(task_id)
+        if current_status:
+            query("UPDATE user_status SET status = ?, last_code_entered = ?, last_result_message_shown = ? WHERE user_id=? AND task_id=?", ["completed" if code == 200 else "in_progress", request.json['code'], resp, user.user_id, task_id])
+        else:
+            query("INSERT INTO user_status  (user_id, task_id, status, last_code_entered, last_result_message_shown) VALUES (?, ?, ?, ?, ?)", [user.user_id, task_id, "completed" if code == 200 else "in_progress", request.json['code'], resp])
+
+        return {"msg": resp}, code
 
 
 @app.route("/api/store/list")

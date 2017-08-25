@@ -1,3 +1,6 @@
+import imp
+
+
 class Tester:
     def __init__(self, function):
         self.function = function
@@ -24,4 +27,5 @@ class Tester:
             h.write(code)
 
         import tmp_file
+        imp.reload(tmp_file)
         return tmp_file
