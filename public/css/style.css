@@ -14,6 +14,11 @@ body{
     padding-left: 0 !important;
 }
 
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
 .job-points{
     font-size: 1em !important;
     position: absolute;
