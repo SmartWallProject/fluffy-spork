@@ -18,6 +18,9 @@ class Errors(Enum):
 def send_js(path):
     return send_from_directory('public', path)
 
+@app.route('/ace-builds/<path:path>')
+def send_ace(path):
+    return send_from_directory('ace-builds', path)
 
 def jsonf(f):
     @wraps(f)
@@ -117,7 +120,7 @@ def handle_jobs(job_id, action):
         user.take_job(job_id)
 
 
-@app.route("/api/tasks/<task_id>/<action>")
+@app.route("/api/task/<task_id>/<action>")
 @requires_auth
 @jsonf
 def task_handler(task_id, action):
