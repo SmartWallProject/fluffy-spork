@@ -32,8 +32,8 @@ angular.module('mainApp')
                 return MyJobs.query().$promise;
             },
             assignJobToMe: function (jobId) {
-                return TakeJob.save({
-                    id: jobId
+                return TakeJob.get({
+                    jobId: jobId
                 }).$promise;
             }
         }
