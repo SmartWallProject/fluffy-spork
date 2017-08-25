@@ -46,10 +46,10 @@ TASK STATUS (per user): status (in_progress / completed), last_code_ente red, la
                                             <div ng-bind-html="task.description"> </div>
                                             <div id="editor_{{task.task_id}}" style="height:300px; width:80%; margin:auto">{{task.default_code}}</div>
                                             <br>
-                                            <button type="button" ng-click="controller.submit_code(task, 'editor_' + task.task_id)"
+                                            <button type="button" ng-click="controller.submit_code(task , 'editor_' + task.task_id)"
                                              class="btn btn-primary btn-sm">Submit</button>
-                                             <span ng-show="task.solutionValid">Solution is valid!</span>
-                                             <span ng-show="task.solutionInvalid">Solution is invalid!!.</span>
+                                             <div class="alert alert-success" ng-show="task.solutionValid"  role="alert"><span ng-bind-html="task.message"> </span></div>
+                                             <div class="alert alert-danger" ng-show="task.solutionInvalid"  role="alert"><span ng-bind-html="task.message"> </span></div>
 
                                         </div>
                                     </div>
