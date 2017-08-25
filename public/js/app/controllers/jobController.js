@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mainApp')
-    .controller('jobController', ['jobService', '$routeParams', function (jobService, $routeParams) {
+    .controller('jobController', ['jobService', '$routeParams', '$sce', function (jobService, $routeParams, $sce) {
         let self = this;
         let jobId = $routeParams.jobId;
         
@@ -9,6 +9,7 @@ angular.module('mainApp')
             .then(function (res) {
                 console.log('Received reponse: ' + res);
                 self.job = res;
+                self.job.text_before_tasks = $sce.trustAsHtml(self.job.text_before_tasks);
                 self.job.tasks = [];
             })
             .then(function () {
@@ -16,6 +17,9 @@ angular.module('mainApp')
             })
             .then(function (res) {
                 self.job.tasks = res;
+                for(var task = 0; task < self.job.tasks.length; task++) {
+                    self.job.tasks[task].description = $sce.trustAsHtml(self.job.tasks[task].description);
+                }
             })
             .catch(function (res) {
                 console.error('Received reponse: ' + res);
