@@ -30,6 +30,7 @@ class User:
 
     @staticmethod
     def add_user(username, password):
+        print("INSERTING #########")
         query("INSERT INTO users (username, password) VALUES (?, ?)", [username, password])
 
     def serialize(self):
