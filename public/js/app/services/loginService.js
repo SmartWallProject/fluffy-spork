@@ -5,11 +5,15 @@ angular.module('mainApp')
     let Login = $resource('/api/login');
     let Register = $resource('/api/register');
     let UserInfo = $resource('/api/user/info');
+    let Logout = $resource('/api/logout');
 
 
     return {
         login : function(data) {
             return Login.save(data).$promise;
+        },
+        logout : function() {
+            return Logout.get().$promise;
         },
         register : function(data) {
             return Register.save(data).$promise;

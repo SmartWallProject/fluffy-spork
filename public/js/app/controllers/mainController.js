@@ -10,7 +10,20 @@ angular.module('mainApp')
         {
             $scope.is_logged_in = true;
         }
-    })
+    });
+
+
+    $scope.logout = function() {
+        loginService.logout().then(function(res)
+        {
+
+            $scope.is_logged_in = false;
+
+
+            // alert(JSON.stringify(res));
+        });
+    }
+
     $scope.login_button = function() {
         loginService.login($scope.login).then(function(res)
         {
@@ -21,7 +34,7 @@ angular.module('mainApp')
 
             // alert(JSON.stringify(res));
         });
-    }
+    };
 
     $scope.register_button = function() {
         loginService.register($scope.login).then(function(res)
@@ -43,6 +56,6 @@ angular.module('mainApp')
             }
 
         });
-    }
+    };
 
-}])
+}]);

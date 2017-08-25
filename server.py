@@ -139,7 +139,8 @@ def store_list():
     return [item.serialize() for item in Store.get_all_store_items()]
 
 
-@app.route('/logout')
+@app.route('/api/logout')
+@jsonf
 def logout():
     User.log_out()
-    return redirect("/")
+    return {}
